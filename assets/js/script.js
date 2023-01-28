@@ -2,12 +2,12 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 var today = dayjs();
-// var isToday =('dayjs/plugin/isToday')
-// dayjs.extend(isToday);
+var saveButton = $('.saveBtn');
+var targetDivs = $('.time-block')
+console.log(targetDivs);
 
-
-var staticDate = dayjs('1-27-23').format('MMM D, YYYY');
-$("#currentDay").text(staticDate);
+var displayTime = dayjs().format('dddd MMM D, YYYY');
+$("#currentDay").text(displayTime);
 
 
 $(function () {
@@ -29,8 +29,28 @@ $(function () {
   // attribute of each time-block be used to do this?
   //
   // TODO: Add code to display the current date in the header of the page.
+  
+  
+  function setColors() {
+    var variableHour = dayjs().format('H')
+    console.log(typeof variableHour);
+    console.log(typeof $(targetDivs[0]).attr('id').replace('hour-', ''));
+    
+    for (let i = 0; i < targetDivs.length; i++) {
+      if ($(targetDivs[i]).attr('id').replace('hour-', '') > variableHour) {
+      //add future css class
+      $(targetDivs[i]).addClass('future');
+        } if ($(targetDivs[i]).attr('id').replace('hour-', '') === variableHour) { 
+        //add present
+        $(targetDivs[i]).addClass('present');
+          } if ($(targetDivs[i]).attr('id').replace('hour-', '') < variableHour){
+          //add past
+          $(targetDivs[i]).addClass('past');
+            }
+          }
+      }  
+        setColors();   
 });
-
 
 
 // GIVEN I am using a daily planner to create a schedule
