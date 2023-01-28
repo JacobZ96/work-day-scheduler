@@ -6,6 +6,7 @@ var saveButton = $('.btn');
 var targetDivs = $('.time-block')
 console.log(targetDivs);
 
+
 var displayTime = dayjs().format('dddd MMM D, YYYY');
 $("#currentDay").text(displayTime);
 
@@ -29,6 +30,7 @@ $(function () {
     console.log(typeof $(targetDivs[0]).attr('id').replace('hour-', ''));
     
     for (let i = 0; i < targetDivs.length; i++) {
+      var hour = $('#hour-' + i);
       if ($(targetDivs[i]).attr('id').replace('hour-', '') > variableHour) {
       //add future css class
       $(targetDivs[i]).addClass('future');
@@ -40,23 +42,20 @@ $(function () {
         $(targetDivs[i]).addClass('past');
           }
         }
-        // var textArea = localStorage.setItem('hour-' + i);
-        // variableHour.children('textarea').val(textArea);
+        // var textArea1 = localStorage.getItem('hour-' + targetDivs[i]);
+        // hour.children('textarea').val(textArea1);
       }  
       setColors();  
-});
       
-function save() {
-    var textArea = $(this).siblings('textarea');
-    var timeblockID = $(this).parent().attr('id');
-    localStorage.setItem(timeblockID, textArea.val());
-};
-
-
-saveButton.on('click', save);
-        
-        
-
+    });
+    
+    function save() {
+        var textArea2 = $(this).siblings('textarea');
+        var timeblockID = $(this).parent().attr('id');
+        localStorage.setItem(timeblockID, textArea2.val());
+    };
+    
+    saveButton.on('click', save);
 
 
 
