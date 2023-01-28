@@ -2,7 +2,7 @@
 // the code isn't run until the browser has finished rendering all the elements
 // in the html.
 var today = dayjs();
-var saveButton = $('.saveBtn');
+var saveButton = $('.btn');
 var targetDivs = $('.time-block')
 console.log(targetDivs);
 
@@ -18,18 +18,10 @@ $(function () {
   // time-block containing the button that was clicked? How might the id be
   // useful when saving the description in local storage?
   //
-  // TODO: Add code to apply the past, present, or future class to each time
-  // block by comparing the id to the current hour. HINTS: How can the id
-  // attribute of each time-block be used to conditionally add or remove the
-  // past, present, and future classes? How can Day.js be used to get the
-  // current hour in 24-hour time?
-  //
   // TODO: Add code to get any user input that was saved in localStorage and set
   // the values of the corresponding textarea elements. HINT: How can the id
   // attribute of each time-block be used to do this?
-  //
-  // TODO: Add code to display the current date in the header of the page.
-  
+  //  
   
   function setColors() {
     var variableHour = dayjs().format('H')
@@ -40,17 +32,32 @@ $(function () {
       if ($(targetDivs[i]).attr('id').replace('hour-', '') > variableHour) {
       //add future css class
       $(targetDivs[i]).addClass('future');
-        } if ($(targetDivs[i]).attr('id').replace('hour-', '') === variableHour) { 
+      } if ($(targetDivs[i]).attr('id').replace('hour-', '') === variableHour) { 
         //add present
         $(targetDivs[i]).addClass('present');
-          } if ($(targetDivs[i]).attr('id').replace('hour-', '') < variableHour){
+      } if ($(targetDivs[i]).attr('id').replace('hour-', '') < variableHour){
           //add past
-          $(targetDivs[i]).addClass('past');
-            }
+        $(targetDivs[i]).addClass('past');
           }
+        }
+        // var textArea = localStorage.setItem('hour-' + i);
+        // variableHour.children('textarea').val(textArea);
       }  
-        setColors();   
+      setColors();  
 });
+      
+function save() {
+    var textArea = $(this).siblings('textarea');
+    var timeblockID = $(this).parent().attr('id');
+    localStorage.setItem(timeblockID, textArea.val());
+};
+
+
+saveButton.on('click', save);
+        
+        
+
+
 
 
 // GIVEN I am using a daily planner to create a schedule
