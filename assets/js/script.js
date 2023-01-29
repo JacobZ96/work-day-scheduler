@@ -7,52 +7,44 @@ var targetDivs = $('.time-block')
 console.log(targetDivs);
 
 
-// var hour09 = $('#hour-09').attr('id');
-// console.log(localStorage.getItem(hour09))
-
-for (let i = 0; i < array.length; i++) {
-  const element = array[i];
-  
-}
-
-
 var displayTime = dayjs().format('dddd MMM D, YYYY');
 $("#currentDay").text(displayTime);
 
 
 $(function () {
-  // TODO: Add code to get any user input that was saved in localStorage and set
-  // the values of the corresponding textarea elements. HINT: How can the id
-  // attribute of each time-block be used to do this?
-  //  
-  
+
   function setColors() {
     var variableHour = dayjs().format('H');
     
     for (let i = 0; i < targetDivs.length; i++) {
-      var hour = $('#hour-' + i);
       if ($(targetDivs[i]).attr('id').replace('hour-', '') > variableHour) {
-      //add future css class
-      $(targetDivs[i]).addClass('future');
+        //add future css class
+        $(targetDivs[i]).addClass('future');
       } if ($(targetDivs[i]).attr('id').replace('hour-', '') === variableHour) { 
         //add present
         $(targetDivs[i]).addClass('present');
       } if ($(targetDivs[i]).attr('id').replace('hour-', '') < variableHour){
-          //add past
+        //add past
         $(targetDivs[i]).addClass('past');
-          }
-        }
-        // var textArea1 = localStorage.getItem('hour-' + targetDivs[i]);
-        // hour.children('textarea').val(textArea1);
-      }  
-      setColors();  
-      
-    });
-    
-    function save() {
-        var textArea2 = $(this).siblings('textarea');
-        var timeblockID = $(this).parent().attr('id');
-        localStorage.setItem(timeblockID, textArea2.val());
+      }
+    }
+  }  
+  setColors();  
+  
+});
+
+for (let i = 09; i < 18; i++) {
+  var storage = $('#hour-' + i);
+  var textArea = localStorage.getItem('hour-' + i);
+  storage.children('textarea').val(textArea);
+}
+
+
+function save() {
+    var textArea2 = $(this).siblings('textarea');
+        console.log(textArea2);
+    var timeblockID = $(this).parent().attr('id');
+    localStorage.setItem(timeblockID, textArea2.val());
     };
     
     saveButton.on('click', save);
