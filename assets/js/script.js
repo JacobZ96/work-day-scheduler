@@ -39,12 +39,11 @@ for (let i = 09; i < 18; i++) {
   storage.children('textarea').val(textArea);
 }
 
-
 function save() {
-    var textArea2 = $(this).siblings('textarea');
-        console.log(textArea2);
+    var textArea = $(this).siblings('textarea');
+        console.log(textArea);
     var timeblockID = $(this).parent().attr('id');
-    localStorage.setItem(timeblockID, textArea2.val());
+    localStorage.setItem(timeblockID, textArea.val());
     };
     
     saveButton.on('click', save);
