@@ -27,6 +27,8 @@ THEN the saved events persist
 ```
 
 ## Live Link
+https://jacobz96.github.io/work-day-scheduler/
 
 ## Screenshot
+![screenshot of work day scheduler](./assets/image/week5.png)
 
