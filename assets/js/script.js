@@ -1,16 +1,13 @@
-// Wrap all code that interacts with the DOM in a call to jQuery to ensure that
-// the code isn't run until the browser has finished rendering all the elements
-// in the html.
+// variables used thoughout the file 
 var today = dayjs();
 var saveButton = $('.btn');
 var targetDivs = $('.time-block')
-console.log(targetDivs);
 
-
+// How the current day is displayed 
 var displayTime = dayjs().format('dddd MMM D, YYYY');
 $("#currentDay").text(displayTime);
 
-
+// Function to add specific colors to the divs based on the time of day 
 $(function () {
 
   function setColors() {
@@ -33,22 +30,30 @@ $(function () {
   
 });
 
+// for loop to cycle through the divs to output localStorage data onto Textarea
 for (let i = 09; i < 18; i++) {
+  if (i < 10) {
+    var storage = $('#hour-0' + i);
+  var textArea = localStorage.getItem('hour-0' + i);
+  storage.children('textarea').val(textArea);
+  }
   var storage = $('#hour-' + i);
   var textArea = localStorage.getItem('hour-' + i);
   storage.children('textarea').val(textArea);
 }
 
+// function to save the text input into the textareas and saving them into localStorage
 function save() {
     var textArea = $(this).siblings('textarea');
-        console.log(textArea);
     var timeblockID = $(this).parent().attr('id');
     localStorage.setItem(timeblockID, textArea.val());
     };
     
-    saveButton.on('click', save);
+    // event listener on the save buttons for each div/textarea
+saveButton.on('click', save);
 
 
+//PsudoCode: 
 
 // GIVEN I am using a daily planner to create a schedule
 
